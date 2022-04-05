@@ -33,15 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-  
-      
-      _counter++;
-    });
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -53,37 +45,29 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Container(
-        decoration: back(),
-        child: Center(
-          
-          child: Column(
+        decoration: const BoxDecoration(
+          image:DecorationImage(
+            image: AssetImage("assets/login.jpg"),
+            fit: BoxFit.cover
+          )
+           ),
+           child: Column(
+             children: [
+              Container(
+        decoration: const BoxDecoration(
+          image:DecorationImage(
+            image: AssetImage("assets/logo.jpg"),),),)
            
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'You have pushed the button this many times:',
-              ),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
-          ),
+        ]
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.baby_changing_station),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        
+
+        ) 
+
+        );
   }
 
-  BoxDecoration back() {
-    return  const BoxDecoration(
-      image: DecorationImage(
-        image: AssetImage('assets/test.png'))
+ 
 
-      );
-  }
 }
+
