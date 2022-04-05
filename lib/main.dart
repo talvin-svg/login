@@ -47,24 +47,28 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+     
       appBar: AppBar(
 
         title: Text(widget.title),
       ),
-      body: Center(
-        
-        child: Column(
-         
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: Container(
+        decoration: back(),
+        child: Center(
+          
+          child: Column(
+           
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              Text(
+                '$_counter',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -73,5 +77,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.baby_changing_station),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  BoxDecoration back() {
+    return  const BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage('assets/test.png'))
+
+      );
   }
 }
