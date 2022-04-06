@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+const _url = 'https://pub.dev/packages/url_launcher';
 void main() {
   runApp(const MyApp());
 }
@@ -16,58 +18,78 @@ class MyApp extends StatelessWidget {
       
         primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
- 
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-     
-      appBar: AppBar(
-
-        title: Text(widget.title),
+      home: Scaffold(
+        backgroundColor: Colors.grey,
+        appBar:AppBar(
+        title:const Text(
+          "HomePage"),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image:DecorationImage(
-            image: AssetImage("assets/login.jpg"),
-            fit: BoxFit.cover
-          )
-           ),
-           child: Column(
-             children: [
-              Container(
-        decoration: const BoxDecoration(
-          image:DecorationImage(
-            image: AssetImage("assets/logo.jpg"),),),)
-           
-        ]
+    body:SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children:  [
+          const SizedBox(height: 15.0,),
+        Expanded(flex:1,
+          child: Container(
+          decoration: const BoxDecoration(image: DecorationImage(image: AssetImage("assets/logo.jpg"))),
+          constraints: const BoxConstraints(maxHeight: 100.0,maxWidth: 50.0),
+          ),
         ),
+        Expanded(
+          flex: 3,
+          // ignore: avoid_unnecessary_containers
+          child: Container(
+            decoration: const BoxDecoration(color: Colors.white,borderRadius:BorderRadius.all(Radius.circular(10)) ),
+            margin: const EdgeInsets.all(20.0),
+            height: 180.0,
+            width: 150.0,
+       
+            child: Column(
+           crossAxisAlignment: CrossAxisAlignment.center,
+           children:  [
+             const Padding(padding: EdgeInsets.all(5.0)),
+             const Text("Hello",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 23.0)),
+             const SizedBox(height: 5.0,),
+             const Text("Please login to Your Account",style:TextStyle(color: Colors.grey)),
+              const SizedBox(height: 10.0,),
+            TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Email',
+                
+                hintText: 'Enter your email',
+                prefixIcon: Icon(Icons.email),
+              ),
+            ),
+            const SizedBox(height: 10.0,),
+             TextFormField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Password',
+                hintText: 'Enter secure password',
+                prefixIcon: Icon(Icons.password_sharp)
+              ),
+            ),
+            const SizedBox(height: 10.0,),
+         const ElevatedButton(onPressed: _launchURL, child: Text('Forget Password'))
+           ],
+            ),
         
+          ),
+        ),
 
-        ) 
-
-        );
+        ]),
+      
+           )
+           )
+           );
+      
   }
-
- 
-
 }
+
+GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
+
+void _launchURL() async =>
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
 
