@@ -5,11 +5,43 @@ const _url = 'https://pub.dev/packages/url_launcher';
 
 var size = const SizedBox(height: 10);
 void main() {
-  runApp(const MyApp());
+  runApp( const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+
+class _MyAppState extends State<MyApp> {
+  // Created a text controller to retrieve the current values from a textfield
+final myController = TextEditingController();
+
+@override 
+void dispose(){
+  //this method cleans up the controller when the widget is removed fromt the widget tree
+  myController.dispose();
+  super.dispose();
+}
+
+void _printLatestValue(){
+  // this method is called every time the text changes, it prints the current value of 
+  // the text field.
+  print('Second text field : ${myController.text}');
+}
+
+@override
+void initState(){
+  super.initState();
+
+  //Start listeening to changes as sooon as 
+  //the app starts and stop when it this stateless widget is disposed.
+  myController.addListener(_printLatestValue);
+}
+
 
 
   @override
@@ -54,17 +86,19 @@ class MyApp extends StatelessWidget {
                const Text("Please login to Your Account",style:TextStyle(color: Colors.grey)),
                 const SizedBox(height: 10.0,),
               TextFormField(
+               onChanged: (text) => print(text),
                 textAlign: TextAlign.start,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Email',
-                  
                   hintText: 'Enter your email',
                   suffixIcon: Icon(Icons.email),
+          
                 ),
               ),
               const SizedBox(height: 10.0,),
                TextFormField(
+                 controller: myController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
