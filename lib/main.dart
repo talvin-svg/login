@@ -133,7 +133,17 @@ void initState(){
                   ),
                 ],
             ),
-         ElevatedButton(onPressed: () => (_formkey.currentState!.validate()),
+         ElevatedButton(onPressed: () {
+           if(_formkey.currentState!.validate()){
+             showDialog(context: context, builder: (context){
+               return AlertDialog(
+              // Retrieve the text that the user has entered by using the TextEditingController
+              content: Text(" ${myController1.text} You're all set, press okay to proceed or cancel to exit " ),
+               );
+             },);
+           }
+         },
+          
           child: 
          const Text('Sign up'),style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.pink),backgroundColor: MaterialStateProperty.all(Colors.amber))
          )],
