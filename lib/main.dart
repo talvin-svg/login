@@ -161,24 +161,41 @@ void initState(){
            if(_formkey.currentState!.validate()){
              showDialog(context: context, builder: (buildContext){
                return AlertDialog(
-                 title: const Text('alertt'),
+                 title: const Text('alert'),
               // Retrieve the text that the user has entered by using the TextEditingController
               content: Text(" ${myController1.text} You're all set, press okay to proceed or cancel to exit " ),
               actions: [
-               ElevatedButton(onPressed: (){
-                 Navigator.pushNamed(context, '/second');
-               }, child: Row(
-                 children: const [
-                   Icon(Icons.thumb_up),
-                   Text("ok")
+               Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                 children: [
+                   GestureDetector(
+                     onTap: (){
+                       Navigator.pushNamed(context, '/second');
+                     }, 
+                     child: Row(
+                      
+                       children: const [
+                         Icon(Icons.thumb_up),
+                         Text("ok")
+                       ],
+                     ),
+                   ),
+                   GestureDetector(
+                 onTap: (){
+                   Navigator.pop(context);
+                 }, 
+                 child: Row(
+                   
+                   children: const [
+                     Icon(Icons.thumb_up),
+                     Text("cancel")
+                   ],
+                 ),
+               ),
                  ],
-               )),
-               ElevatedButton(onPressed: (){Navigator.pop(context);}, child:  Row(
-                 children: const [
-                   Icon(Icons.thumb_down),
-                   Text("cancel")
-                 ],)
-                 )
+                 
+               ),
+               
                 
               ],
                );
