@@ -1,23 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 const _url = 'https://pub.dev/packages/url_launcher';
 
 var size = const SizedBox(height: 10);
+
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-   const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+   
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
 }
 
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, }) : super(key: key);
 
-class _MyAppState extends State<MyApp> {
-//
+
+  
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+// key that track the state of the form
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
 
   // Created a text controller to retrieve the current values from a textfield
@@ -53,13 +73,12 @@ void initState(){
 }
 
 
+  
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData.light(),
-      home: Scaffold(
+
+   return Scaffold(
         backgroundColor: Colors.grey,
         appBar:AppBar(
         title:const Text(
@@ -98,17 +117,17 @@ void initState(){
                  const Text("Please login to Your Account",style:TextStyle(color: Colors.grey)),
                   const SizedBox(height: 10.0,),
                 TextFormField(
-                  validator: ((value) => value == null || value.isEmpty ? 'Please enter some text' : null),
-                 controller: myController1,
-                  textAlign: TextAlign.start,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter your email',
-                    suffixIcon: Icon(Icons.email),
+               validator: ((value) => value == null || value.isEmpty ? 'Please enter some text' : null),
+                controller: myController1,
+                textAlign: TextAlign.start,
+                decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Email',
+                hintText: 'Enter your email',
+               suffixIcon: Icon(Icons.email),
             
-                  ),
-                ),
+      ),
+    ),
                 const SizedBox(height: 10.0,),
                  TextFormField(
                    validator: ((value) => value == null || value.isEmpty ? 'Please enter some text' : null),
@@ -135,7 +154,7 @@ void initState(){
             ),
          ElevatedButton(onPressed: () {
            if(_formkey.currentState!.validate()){
-             showDialog(context: context, builder: (BuildContext context){
+             showDialog(context: context, builder: (buildContext){
                return AlertDialog(
                  title: const Text('alertt'),
               // Retrieve the text that the user has entered by using the TextEditingController
@@ -158,15 +177,10 @@ void initState(){
       ),
       
            )
-           )
            );
-      
   }
 }
 
 
-
-
 void _launchURL() async =>
     await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';
-
