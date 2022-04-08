@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login/todo.dart';
 import 'package:url_launcher/url_launcher.dart';
 const _url = 'https://pub.dev/packages/url_launcher';
 
@@ -15,6 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/second' :  (context) =>  const Todoos(),
+      },
       title: 'Flutter Demo',
       theme: ThemeData(
    
@@ -159,6 +164,23 @@ void initState(){
                  title: const Text('alertt'),
               // Retrieve the text that the user has entered by using the TextEditingController
               content: Text(" ${myController1.text} You're all set, press okay to proceed or cancel to exit " ),
+              actions: [
+               ElevatedButton(onPressed: (){
+                 Navigator.pushNamed(context, '/second');
+               }, child: Row(
+                 children: const [
+                   Icon(Icons.thumb_up),
+                   Text("ok")
+                 ],
+               )),
+               ElevatedButton(onPressed: (){Navigator.pop(context);}, child:  Row(
+                 children: const [
+                   Icon(Icons.thumb_down),
+                   Text("cancel")
+                 ],)
+                 )
+                
+              ],
                );
              },);
            }
