@@ -5,7 +5,7 @@ const _url = 'https://pub.dev/packages/url_launcher';
 
 var size = const SizedBox(height: 10);
 void main() {
-  runApp( const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -135,8 +135,9 @@ void initState(){
             ),
          ElevatedButton(onPressed: () {
            if(_formkey.currentState!.validate()){
-             showDialog(context: context, builder: (context){
+             showDialog(context: context, builder: (BuildContext context){
                return AlertDialog(
+                 title: const Text('alertt'),
               // Retrieve the text that the user has entered by using the TextEditingController
               content: Text(" ${myController1.text} You're all set, press okay to proceed or cancel to exit " ),
                );
