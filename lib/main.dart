@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/second' :  (context) =>  const Todoos(),
+        '/second' :  (context) =>   Todo(),
+        '/signup' : (context) => const MyApp()
       },
       title: 'Flutter Demo',
       theme: ThemeData(
