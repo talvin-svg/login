@@ -58,7 +58,7 @@ class Pop extends StatelessWidget {
     return ElevatedButton(
   
         onPressed: () {
-         Navigator.pushNamed(context, '/');
+         Navigator.pushNamed(context, '/signup');
         },
         child: const Text("back"),
       

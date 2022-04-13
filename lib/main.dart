@@ -45,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 // key that track the state of the form
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+ 
 
   // Created a text controller to retrieve the current values from a textfield
 final myController1 = TextEditingController();
@@ -119,8 +120,8 @@ void initState(){
              children:  [
                  const Padding(padding: EdgeInsets.all(5.0)),
                  const Text("Hello",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 23.0,color: Colors.black)),
-                 const SizedBox(height: 5.0,),
-                 const Text("Please login to Your Account",style:TextStyle(color: Colors.grey)),
+                const SizedBox(height: 5.0,),
+                  const Text("Please login to Your Account",style:TextStyle(color: Colors.grey)),
                   const SizedBox(height: 10.0,),
                 TextFormField(
                validator: ((value) => value == null || value.isEmpty ? 'Please enter some text' : null),
@@ -139,7 +140,7 @@ void initState(){
                    validator: ((value) => value == null || value.isEmpty ? 'Please enter some text' : null),
                    controller: myController2,
                    obscureText: true,
-                  decoration: const InputDecoration(
+                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
                     hintText: 'Enter secure password',
@@ -169,8 +170,8 @@ void initState(){
                Row(
                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                  children: [
-                   GestureDetector(
-                     onTap: (){
+                   ElevatedButton(
+                     onPressed: (){
                        Navigator.pushNamed(context, '/second');
                      }, 
                      child: Row(
@@ -181,8 +182,8 @@ void initState(){
                        ],
                      ),
                    ),
-                   GestureDetector(
-                 onTap: (){
+                   ElevatedButton(
+                 onPressed: (){
                    Navigator.pop(context);
                  }, 
                  child: Row(
