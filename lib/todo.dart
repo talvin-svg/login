@@ -62,9 +62,16 @@ bool _value = false;
                      
            ),
            )
-    )
+    ),
+    
       
-    )],
+    ),
+    ElevatedButton(onPressed: (){
+    setState(() {
+      entries.add("new text");
+    });
+    }, child: const Icon(Icons.add))
+    ],
     );
   }
 
