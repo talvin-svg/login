@@ -1,5 +1,5 @@
-import 'dart:math';
 
+import 'activity.dart';
 import 'package:flutter/material.dart';
 
 var size = const SizedBox(height: 10);
@@ -42,9 +42,19 @@ class _TodoosState extends State<Todoos> {
 
 
 TextEditingController contollerInput = TextEditingController();
-  final List<String> entries = <String>['yo','me','pull'];
-final List<int> colorCodes = <int>[100,200,600];
 
+@override 
+void dispose(){
+  //this method cleans up the controller when the widget is removed fromt the widget tree
+  contollerInput.dispose();
+  super.dispose();
+}
+
+   List<String> entries = <String>['yo','me','pull'];
+  // final List<TodoActivity> todooos = <TodoActivity>[];
+final List<int> colorCodes = <int>[100,200,600];
+  bool _isEnabled = true;
+  bool _notEnabled = false;
 void addItemToList(){
   setState(() {
     entries.insert(0, contollerInput.text);
@@ -56,49 +66,68 @@ void addItemToList(){
     return  Column(
       children: [
     Expanded(
-   
+     
       child: ListView.builder(
            padding: const EdgeInsets.all(8),
         itemCount: entries.length,
         itemBuilder:(context, index) =>
-           Container(
-                   height: 50,
-                   color: Colors.blue[colorCodes[index]],
-                   child:  Row(
+          //  Container(
+          //          height: 50,
+          //          color: Colors.blue[colorCodes[index]],
+          //          child:  Row(
                     
-                     children: [
-                     const MyStatefulWidget(),
-                        Text(entries[index]),
-                        const Spacer(),
-                       GestureDetector(
+          //            children: [
+          //            const MyStatefulWidget(),
+          //               Text(entries[index]),
+          //               const Spacer(),
+          //              GestureDetector(
+          //                child:
+          //                 const Icon(
+          //                   Icons.edit))
+          //            ],
+                     
+          //  ),
+          //  )
+         Row(
+           children: [
+             const MyStatefulWidget(),
+             Expanded(child: TodoActivity(title: entries[index], what: _notEnabled)),
+             const SizedBox(width: 30,),
+               GestureDetector(
+                //  onTap: () {
+                //    setState(() {
+                //      what : _isEnabeld;
+                //    });
+                //  },
                          child:
                           const Icon(
                             Icons.edit))
-                     ],
-                     
-           ),
-           )
+           ],
+         )
     ),
     
       
     ),
     ElevatedButton(
       onPressed: (){
-   showDialog(context: context, builder: (buildContext){
+     showDialog(context: context, builder: (buildContext){
       return AlertDialog(
         title: const Text("Create new TODO"),
         content: TextFormField(
+          enabled: true,
           controller: contollerInput,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Enter todo',
            ),
         ),
-        actions: [
+       actions: [
           ElevatedButton(
             onPressed: (){
-addItemToList();
-Navigator.pop(context);
+          addItemToList();
+          Navigator.pop(context);
+          contollerInput.clear();
+       
             }, 
             child: const Text('OK'),
             style: ButtonStyle(
@@ -107,6 +136,8 @@ Navigator.pop(context);
             ),ElevatedButton(
             onPressed: (){
        Navigator.pop(context);
+       contollerInput.clear();
+    
             }, 
             child: const Text('Cancel'),
             style: ButtonStyle(
@@ -115,7 +146,7 @@ Navigator.pop(context);
             )
         ],
       );
-   });
+     });
     }, child: const Icon(Icons.add))
     ],
     );

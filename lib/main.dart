@@ -74,10 +74,10 @@ void _printLatestValue2(){
 void initState(){
   super.initState();
 
-  //Start listeening to changes as sooon as 
-  //the app starts and stops when it this stateless widget is disposed.
-  myController2.addListener(_printLatestValue2);
-  myController1.addListener(_printLatestValue1);
+  // //Start listeening to changes as sooon as 
+  // //the app starts and stops when it this stateless widget is disposed.
+  // myController2.addListener(_printLatestValue2);
+  // myController1.addListener(_printLatestValue1);
 }
 
 
