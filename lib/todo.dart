@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 var size = const SizedBox(height: 10);
@@ -43,6 +45,12 @@ TextEditingController contollerInput = TextEditingController();
   final List<String> entries = <String>['yo','me','pull'];
 final List<int> colorCodes = <int>[100,200,600];
 
+void addItemToList(){
+  setState(() {
+    entries.insert(0, contollerInput.text);
+    colorCodes.insert(0, 600);
+  });
+}
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -57,9 +65,15 @@ final List<int> colorCodes = <int>[100,200,600];
                    height: 50,
                    color: Colors.blue[colorCodes[index]],
                    child:  Row(
+                    
                      children: [
                      const MyStatefulWidget(),
-                        Text(entries[index])
+                        Text(entries[index]),
+                        const Spacer(),
+                       GestureDetector(
+                         child:
+                          const Icon(
+                            Icons.edit))
                      ],
                      
            ),
@@ -83,12 +97,22 @@ final List<int> colorCodes = <int>[100,200,600];
         actions: [
           ElevatedButton(
             onPressed: (){
-
+addItemToList();
+Navigator.pop(context);
             }, 
             child: const Text('OK'),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.green)
-            ),)
+            ),
+            ),ElevatedButton(
+            onPressed: (){
+       Navigator.pop(context);
+            }, 
+            child: const Text('Cancel'),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.red)
+            ),
+            )
         ],
       );
    });
