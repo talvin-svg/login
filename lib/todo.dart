@@ -4,7 +4,7 @@ var size = const SizedBox(height: 10);
 class Todo extends StatelessWidget {
    Todo({ Key? key }) : super(key: key);
 
-// final  controller1 = TextEditingController();
+
 // final  controller2 = TextEditingController();
 
 
@@ -38,9 +38,11 @@ class Todoos extends StatefulWidget {
 
 class _TodoosState extends State<Todoos> {
 
+
+TextEditingController contollerInput = TextEditingController();
   final List<String> entries = <String>['yo','me','pull'];
 final List<int> colorCodes = <int>[100,200,600];
-bool _value = false;
+
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -66,10 +68,30 @@ bool _value = false;
     
       
     ),
-    ElevatedButton(onPressed: (){
-    setState(() {
-      entries.add("new text");
-    });
+    ElevatedButton(
+      onPressed: (){
+   showDialog(context: context, builder: (buildContext){
+      return AlertDialog(
+        title: const Text("Create new TODO"),
+        content: TextFormField(
+          controller: contollerInput,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Enter todo',
+           ),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: (){
+
+            }, 
+            child: const Text('OK'),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green)
+            ),)
+        ],
+      );
+   });
     }, child: const Icon(Icons.add))
     ],
     );
